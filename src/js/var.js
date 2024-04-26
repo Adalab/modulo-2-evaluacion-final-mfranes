@@ -1,0 +1,1 @@
+const btnSearch = document.querySelector('.js_btnSearch');
