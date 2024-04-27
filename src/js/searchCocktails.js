@@ -1,10 +1,12 @@
 console.log("search");
+const searchInput=document.querySelector('.js_inputSearch');
 
 const handleClickSearch = (event) => {
-  event.preventDefault();
   console.log("handleClickSearch");
-
-  renderCocktails("margarita");
+  event.preventDefault();
+  
+  const searchValue = searchInput.value;
+  renderCocktails(searchValue);
 };
 
 btnSearch.addEventListener("click", handleClickSearch);
