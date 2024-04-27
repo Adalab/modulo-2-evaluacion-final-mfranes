@@ -1,10 +1,10 @@
 console.log("search");
-const searchInput=document.querySelector('.js_inputSearch');
+const searchInput = document.querySelector(".js_inputSearch");
 
 const handleClickSearch = (event) => {
   console.log("handleClickSearch");
   event.preventDefault();
-  
+
   const searchValue = searchInput.value;
   renderCocktails(searchValue);
 };
@@ -21,7 +21,11 @@ const renderCocktails = (cocktaillName) => {
     .then((dataResponse) => {
       // console.log(dataResponse);
       for (const drink of dataResponse.drinks) {
-        const imageUrl = drink.strDrinkThumb;
+        let imageUrl = drink.strDrinkThumb;
+        if (imageUrl === null) {
+          imageUrl =
+            "https://via.placeholder.com/150x150/ffffff/666666/?text=no%20image";
+        }
         const drinkName = drink.strDrink;
 
         createArticle(imageUrl, drinkName);
