@@ -15,8 +15,8 @@ const createArticle = (imageUrl, cocktaillName) => {
   ulListCocktail.appendChild(listElement);
 
   const anArticle = document.createElement("article");
-  const cocktailImage = document.createElement("span");
-  cocktailImage.textContent = imageUrl;
+  const cocktailImage = document.createElement("img");
+  cocktailImage.src = imageUrl;
   anArticle.appendChild(cocktailImage);
   const cocktailTitle = document.createElement("h2");
   cocktailTitle.textContent = cocktaillName;
