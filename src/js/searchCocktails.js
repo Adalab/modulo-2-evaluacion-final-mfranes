@@ -9,6 +9,12 @@ btnSearch.addEventListener('click', handleClickSearch);
 
 const createArticle = (imageUrl, cocktailTitle) => {
     const listSection = document.querySelector('.js_listSection');
+
+    const ulListCocktail = document.createElement('ul');
+    const listElement = document.createElement('li');
+    listSection.appendChild(ulListCocktail);
+    ulListCocktail.appendChild(listElement);
+
     const anArticle = document.createElement('article');
     const cocktailImage = document.createElement('span');
     cocktailImage.textContent= imageUrl;
@@ -16,5 +22,5 @@ const createArticle = (imageUrl, cocktailTitle) => {
     const cocktailName = document.createElement('h2');
     cocktailName.textContent = cocktailTitle;
     anArticle.appendChild(cocktailName);
-    listSection.appendChild(anArticle);
+    listElement.appendChild(anArticle);
 }
