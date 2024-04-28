@@ -32,7 +32,7 @@ const renderCocktails = (cocktaillName) => {
 
       storeDrinksArray();
 
-      createArticles();
+      createCocktailsFromArray();
     });
 };
 

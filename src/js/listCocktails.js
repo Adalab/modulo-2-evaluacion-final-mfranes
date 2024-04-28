@@ -29,7 +29,7 @@ const createArticle = (imageUrl, drinkName, drinkId) => {
   listElement.appendChild(anArticle);
 };
 
-const createArticles = () => {
+const createCocktailsFromArray = () => {
   for (const cocktail of cocktails) {
     createArticle(cocktail.imageUrl, cocktail.name, cocktail.id);
   }
@@ -58,3 +58,15 @@ const painSelectedCocktail = (cocktailId) => {
 const storeDrinksArray = ()=> {
   localStorage.setItem('dataNormal', JSON.stringify(cocktails));
 }
+
+const loadCocktailsFromStorage = () => {
+  const cocktailsFromStorage = JSON.parse(localStorage.getItem("dataNormal"));
+  //console.log(cocktailsFromStorage);
+
+  if (cocktailsFromStorage !== null) {
+    cocktails = cocktailsFromStorage;
+    createCocktailsFromArray();
+  }
+};
+
+loadCocktailsFromStorage();

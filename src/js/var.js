@@ -1,2 +1,2 @@
-const cocktails = [];
+let cocktails = [];
 const favoriteCocktails = [];
