@@ -11,6 +11,8 @@ const createArticle = (imageUrl, cocktaillName) => {
     ulListCocktail.appendChild(listElement);
   
     const anArticle = document.createElement("article");
+    anArticle.addEventListener("click",handleClickArticle);
+  
     const cocktailImage = document.createElement("img");
     cocktailImage.src = imageUrl;
     cocktailImage.classList.add('s_listSection__cocktailThumbnail');
@@ -19,4 +21,8 @@ const createArticle = (imageUrl, cocktaillName) => {
     cocktailTitle.textContent = cocktaillName;
     anArticle.appendChild(cocktailTitle);
     listElement.appendChild(anArticle);
+
   };
+  const handleClickArticle = (event) =>{
+ console.log('hola');
+  }
