@@ -28,7 +28,7 @@ const renderCocktails = (cocktaillName) => {
 
         // agregar el coktail a un array
         addDrinkToArray(imageUrl, drinkName, drinkId);
-        createArticle(imageUrl, drinkName);
+        createArticle(imageUrl, drinkName, drinkId);
 
       }
 

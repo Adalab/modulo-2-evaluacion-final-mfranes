@@ -1,6 +1,6 @@
 console.log("list");
 
-const createArticle = (imageUrl, cocktaillName) => {
+const createArticle = (imageUrl, drinkName, drinkId) => {
   let imageUrlWithDefault = imageUrl;
   if (imageUrl === null) {
     imageUrlWithDefault =
@@ -16,6 +16,7 @@ const createArticle = (imageUrl, cocktaillName) => {
   ulListCocktail.appendChild(listElement);
 
   const anArticle = document.createElement("article");
+  anArticle.id = drinkId;
   anArticle.addEventListener("click", handleClickArticle);
 
   const cocktailImage = document.createElement("img");
@@ -23,7 +24,7 @@ const createArticle = (imageUrl, cocktaillName) => {
   cocktailImage.classList.add("s_listSection__cocktailThumbnail");
   anArticle.appendChild(cocktailImage);
   const cocktailTitle = document.createElement("h2");
-  cocktailTitle.textContent = cocktaillName;
+  cocktailTitle.textContent = drinkName;
   anArticle.appendChild(cocktailTitle);
   listElement.appendChild(anArticle);
 };
