@@ -1,1 +1,1 @@
-const btnSearch = document.querySelector('.js_btnSearch');
+const drinks = [];
