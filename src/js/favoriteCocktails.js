@@ -45,6 +45,12 @@ const addCocktailToFavoriteArray = (cocktailId) => {
   });
 };
 
+const createFavoriteCocktailsFromArray = () => {
+  for (const favoriteCocktail of favoriteCocktails) {
+    createFavoriteCocktailFromArray(favoriteCocktail.id);
+  }
+}
+
 const createFavoriteCocktailFromArray = (cocktailId) => {
   const cocktailFound = favoriteCocktails.find(cocktail => cocktail.id === cocktailId);
   createFavoriteCocktail(cocktailFound.name, cocktailFound.imageUrl);
@@ -53,3 +59,17 @@ const createFavoriteCocktailFromArray = (cocktailId) => {
 const storeFavoriteDrinksArray = ()=> {
   localStorage.setItem('dataFavorite', JSON.stringify(favoriteCocktails));
 }
+
+const loadFavoriteCocktailsFromStorage = () => {
+  const favoriteCocktailsFromStorage = JSON.parse(localStorage.getItem("dataFavorite"));
+  //console.log(favoriteCocktailsFromStorage);
+
+  if (favoriteCocktailsFromStorage !== null) {
+    favoriteCocktails = favoriteCocktailsFromStorage;
+    //console.log(favoriteCocktails);
+    createFavoriteCocktailsFromArray();
+  }
+};
+
+
+loadFavoriteCocktailsFromStorage();
