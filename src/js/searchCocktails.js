@@ -21,11 +21,7 @@ const renderCocktails = (cocktaillName) => {
     .then((dataResponse) => {
       // console.log(dataResponse);
       for (const drink of dataResponse.drinks) {
-        let imageUrl = drink.strDrinkThumb;
-        if (imageUrl === null) {
-          imageUrl =
-            "https://via.placeholder.com/150x150/ffffff/666666/?text=no%20image";
-        }
+        const imageUrl = drink.strDrinkThumb;
         const drinkName = drink.strDrink;
 
         createArticle(imageUrl, drinkName);
