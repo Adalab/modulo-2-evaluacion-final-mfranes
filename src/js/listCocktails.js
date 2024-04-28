@@ -37,16 +37,22 @@ const createArticles = () => {
 
 const handleClickArticle = (event) => {
   event.preventDefault();
-  console.log(event.currentTarget);
+  //console.log(event.currentTarget);
   const cocktailId = event.currentTarget.id;
 
   if (cocktailIsNotAlreadyFavorite(cocktailId)) {
+
     addCocktailToFavoriteArray(cocktailId);
-    createFavoriteCocktailFromArray(cocktailId);    
+    createFavoriteCocktailFromArray(cocktailId);
+
+    painSelectedCocktail(cocktailId);
   }
-  
+
 };
 
 
 
-
+const painSelectedCocktail = (cocktailId) => {
+  const cocktail = document.querySelector(`#${cocktailId}`);
+  cocktail.classList.add('selectedCocktail');
+}

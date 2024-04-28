@@ -24,7 +24,7 @@ const renderCocktails = (cocktaillName) => {
       for (const drink of dataResponse.drinks) {
         const imageUrl = drink.strDrinkThumb;
         const drinkName = drink.strDrink;
-        const drinkId = drink.idDrink;
+        const drinkId = `cocktail_${drink.idDrink}`;
 
         // agregar el coktail a un array
         addDrinkToArray(imageUrl, drinkName, drinkId);
