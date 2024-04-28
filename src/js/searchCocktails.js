@@ -1,5 +1,5 @@
 console.log("search");
-const btnSearch = document.querySelector('.js_btnSearch');
+const btnSearch = document.querySelector(".js_btnSearch");
 const searchInput = document.querySelector(".js_inputSearch");
 
 const handleClickSearch = (event) => {
@@ -28,23 +28,16 @@ const renderCocktails = (cocktaillName) => {
 
         // agregar el coktail a un array
         addDrinkToArray(imageUrl, drinkName, drinkId);
-        createArticle(imageUrl, drinkName, drinkId);
-
       }
 
-      console.log(drinks);
-
-      // createArticles();
+      createArticles();
     });
 };
 
 const addDrinkToArray = (imageUrl, drinkName, drinkId) => {
-  drinks.push(
-    {
-      id: drinkId,
-      name: drinkName,
-      imageUrl: imageUrl
-    }
-  );
+  cocktails.push({
+    id: drinkId,
+    name: drinkName,
+    imageUrl: imageUrl,
+  });
 };
-

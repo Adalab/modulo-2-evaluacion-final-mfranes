@@ -1,1 +1,1 @@
-const drinks = [];
+const cocktails = [];

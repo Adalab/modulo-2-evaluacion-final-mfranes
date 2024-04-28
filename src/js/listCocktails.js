@@ -29,6 +29,12 @@ const createArticle = (imageUrl, drinkName, drinkId) => {
   listElement.appendChild(anArticle);
 };
 
+const createArticles = () => {
+  for (const cocktail of cocktails) {
+    createArticle(cocktail.imageUrl, cocktail.name, cocktail.id);
+  }
+}
+
 const handleClickArticle = (event) => {
   console.log("hola");
 };
