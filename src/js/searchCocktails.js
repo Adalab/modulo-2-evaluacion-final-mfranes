@@ -30,6 +30,8 @@ const renderCocktails = (cocktaillName) => {
         addDrinkToArray(imageUrl, drinkName, drinkId);
       }
 
+      storeDrinksArray();
+
       createArticles();
     });
 };

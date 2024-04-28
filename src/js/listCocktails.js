@@ -43,16 +43,18 @@ const handleClickArticle = (event) => {
   if (cocktailIsNotAlreadyFavorite(cocktailId)) {
 
     addCocktailToFavoriteArray(cocktailId);
-    createFavoriteCocktailFromArray(cocktailId);
+    storeFavoriteDrinksArray();
 
+    createFavoriteCocktailFromArray(cocktailId);
     painSelectedCocktail(cocktailId);
   }
-
 };
-
-
 
 const painSelectedCocktail = (cocktailId) => {
   const cocktail = document.querySelector(`#${cocktailId}`);
   cocktail.classList.add('selectedCocktail');
+}
+
+const storeDrinksArray = ()=> {
+  localStorage.setItem('dataNormal', JSON.stringify(cocktails));
 }

@@ -49,3 +49,7 @@ const createFavoriteCocktailFromArray = (cocktailId) => {
   const cocktailFound = favoriteCocktails.find(cocktail => cocktail.id === cocktailId);
   createFavoriteCocktail(cocktailFound.name, cocktailFound.imageUrl);
 }
+
+const storeFavoriteDrinksArray = ()=> {
+  localStorage.setItem('dataFavorite', JSON.stringify(favoriteCocktails));
+}
