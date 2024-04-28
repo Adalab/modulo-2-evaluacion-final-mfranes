@@ -34,3 +34,5 @@ const renderCocktails = (cocktaillName) => {
       }
     });
 };
+favoriteArticle.addEventListener('click',handleClickFavorite)
+console.log(hola);
