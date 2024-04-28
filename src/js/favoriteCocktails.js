@@ -25,4 +25,27 @@ const createFavoriteCocktail = (cocktailName, imageUrl) => {
   favoriteLi.appendChild(deleteIcon);
 };
 
+const cocktailIsNotAlreadyFavorite = (cocktailId) => {
+  let cocktailFound = favoriteCocktails.find(cocktail => cocktail.id === cocktailId);
 
+  if (cocktailFound === undefined) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+const addCocktailToFavoriteArray = (cocktailId) => {
+  const cocktailFound = cocktails.find((cocktail) => cocktail.id === cocktailId);
+
+  favoriteCocktails.push({
+    id: cocktailFound.id,
+    name: cocktailFound.name,
+    imageUrl: cocktailFound.imageUrl,
+  });
+};
+
+const createFavoriteCocktailFromArray = (cocktailId) => {
+  const cocktailFound = favoriteCocktails.find(cocktail => cocktail.id === cocktailId);
+  createFavoriteCocktail(cocktailFound.name, cocktailFound.imageUrl);
+}

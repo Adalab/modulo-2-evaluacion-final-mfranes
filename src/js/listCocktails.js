@@ -39,6 +39,14 @@ const handleClickArticle = (event) => {
   event.preventDefault();
   console.log(event.currentTarget);
   const cocktailId = event.currentTarget.id;
-  const cocktailFound = cocktails.find(cocktail => cocktail.id === cocktailId);
-  createFavoriteCocktail(cocktailFound.name, cocktailFound.imageUrl);
+
+  if (cocktailIsNotAlreadyFavorite(cocktailId)) {
+    addCocktailToFavoriteArray(cocktailId);
+    createFavoriteCocktailFromArray(cocktailId);    
+  }
+  
 };
+
+
+
+
