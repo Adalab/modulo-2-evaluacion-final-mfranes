@@ -1,6 +1,7 @@
 console.log("search");
 const btnSearch = document.querySelector(".js_btnSearch");
 const searchInput = document.querySelector(".js_inputSearch");
+const resetButton = document.querySelector('.js_resetBtn');
 
 const handleClickSearch = (event) => {
   console.log("handleClickSearch");
@@ -43,3 +44,9 @@ const addDrinkToArray = (imageUrl, drinkName, drinkId) => {
     imageUrl: imageUrl,
   });
 };
+
+const handleClickReset = ()=>{
+  
+}
+
+resetButton.addEventListener('click',handleClickReset);
