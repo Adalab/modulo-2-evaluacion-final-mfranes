@@ -1,20 +1,33 @@
 console.log('favorite');
 
-const createFavoriteCocktail = (cocktailName, imageUrl) => {
+const handleClickDeleteFavorite = (event) => {
+  const cocktailId = event.currentTarget.id;
+  console.log(event.currentTarget);
+  console.log(event.currentTarget.id);
+  console.log('handleClickDeleteFavorite: ' + cocktailId);
+  deleteFavoriteCocktail(cocktailId);
+};
+
+const createFavoriteCocktail = (cocktailId, cocktailName, imageUrl) => {
   const sectionFavorite = document.querySelector(".js_favoriteSection");
   const favoriteUL = document.querySelector(".js_ulFavorite");
 
   const favoriteLi = document.createElement("li");
+  favoriteLi.id = 'favorite_' + cocktailId;
+  favoriteLi.addEventListener('click', handleClickDeleteFavorite);  
   sectionFavorite.appendChild(favoriteUL);
   favoriteUL.appendChild(favoriteLi);
 
-  const favoriteArticle = document.createElement("article");
+  const favoriteArticle = document.createElement("article");  
   favoriteArticle.classList.add('favoriteSection__ul__article');
+
   const favoriteImg = document.createElement("img");
   favoriteImg.src = imageUrl;
   favoriteImg.classList.add('favoriteSection__ul__cocktailThumbnail');
+
   const favoriteName = document.createElement("h2");
   favoriteName.textContent = cocktailName;
+
   const deleteIcon = document.createElement("i");
   deleteIcon.classList.add('fa');
   deleteIcon.classList.add('fa-times-circle');
@@ -53,7 +66,7 @@ const createFavoriteCocktailsFromArray = () => {
 
 const createFavoriteCocktailFromArray = (cocktailId) => {
   const cocktailFound = favoriteCocktails.find(cocktail => cocktail.id === cocktailId);
-  createFavoriteCocktail(cocktailFound.name, cocktailFound.imageUrl);
+  createFavoriteCocktail(cocktailFound.id, cocktailFound.name, cocktailFound.imageUrl);
 }
 
 const storeFavoriteDrinksArray = ()=> {
@@ -73,3 +86,31 @@ const loadFavoriteCocktailsFromStorage = () => {
 
 
 loadFavoriteCocktailsFromStorage();
+
+
+
+const deleteFavoriteCocktailFromArray = (cocktailId) => {
+  const resultFavoriteCocktails = favoriteCocktails.filter(cocktail => cocktail.id !== cocktailId);
+  favoriteCocktails = resultFavoriteCocktails;
+}
+
+const deleteFavoriteCocktaillFromLocalStorage = (cocktailId) => {
+  const favoriteCocktailsFromStorage = JSON.parse(localStorage.getItem("dataFavorite"));
+  const resultFavoriteCocktailsFromStorage = favoriteCocktailsFromStorage.filter(cocktail => cocktail.id !== cocktailId);
+  localStorage.setItem('dataFavorite', JSON.stringify(resultFavoriteCocktailsFromStorage));  
+}
+
+const deleteFavoriteCocktailFromDom = (cocktailId) => {
+  const favoriteUL = document.querySelector(".js_ulFavorite");
+  const favoriteCocktailToBeRemoved = document.querySelector(`#${cocktailId}`);
+  console.log(`#${cocktailId}`);
+  favoriteUL.removeChild(favoriteCocktailToBeRemoved);
+}
+
+const deleteFavoriteCocktail = (cocktailId) => {
+  deleteFavoriteCocktailFromArray(cocktailId);
+
+  deleteFavoriteCocktaillFromLocalStorage(cocktailId);
+
+  deleteFavoriteCocktailFromDom(cocktailId);
+}
