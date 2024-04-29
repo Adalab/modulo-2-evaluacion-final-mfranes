@@ -29,11 +29,6 @@ const createArticle = (imageUrl, drinkName, drinkId) => {
   listElement.appendChild(anArticle);
 };
 
-const createCocktailsFromArray = () => {
-  for (const cocktail of cocktails) {
-    createArticle(cocktail.imageUrl, cocktail.name, cocktail.id);
-  }
-}
 
 const handleClickArticle = (event) => {
   event.preventDefault();
@@ -46,17 +41,29 @@ const handleClickArticle = (event) => {
     storeFavoriteDrinksArray();
 
     createFavoriteCocktailFromArray(cocktailId);
-    painSelectedCocktail(cocktailId);
+    paintCocktail(cocktailId);
   }
 };
 
-const painSelectedCocktail = (cocktailId) => {
+const paintCocktail = (cocktailId) => {
   const cocktail = document.querySelector(`#${cocktailId}`);
   cocktail.classList.add('selectedCocktail');
 }
 
 const storeDrinksArray = ()=> {
   localStorage.setItem('dataNormal', JSON.stringify(cocktails));
+}
+
+const createCocktailsFromArray = () => {
+  for (const cocktail of cocktails) {
+    createArticle(cocktail.imageUrl, cocktail.name, cocktail.id);
+  }
+}
+
+const paintCocktailsThatAreFavorites = () => {
+  for (const favoriteCocktail of favoriteCocktails) {
+    paintCocktail(favoriteCocktail.id);
+  }
 }
 
 const loadCocktailsFromStorage = () => {
@@ -66,6 +73,7 @@ const loadCocktailsFromStorage = () => {
   if (cocktailsFromStorage !== null) {
     cocktails = cocktailsFromStorage;
     createCocktailsFromArray();
+    paintCocktailsThatAreFavorites();;
   }
 };
 
