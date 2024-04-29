@@ -9,6 +9,7 @@ const handleClickSearch = (event) => {
   event.preventDefault();
 
   const searchValue = searchInput.value;
+  clearCocktails();
   renderCocktails(searchValue);
 };
 
@@ -60,4 +61,4 @@ const clearCocktails = () => {
 }
 
 
-resetBtn.addEventListener('click',handleClickReset);
+resetBtn.addEventListener("click", handleClickReset);
