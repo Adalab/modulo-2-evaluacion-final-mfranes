@@ -16,7 +16,7 @@ const createArticle = (imageUrl, drinkName, drinkId) => {
   ulListCocktail.appendChild(listElement);
 
   const anArticle = document.createElement("article");
-  anArticle.id = drinkId;
+  anArticle.id = `cocktail_${drinkId}`;
   anArticle.addEventListener("click", handleClickArticle);
 
   const cocktailImage = document.createElement("img");
@@ -33,26 +33,38 @@ const createArticle = (imageUrl, drinkName, drinkId) => {
 const handleClickArticle = (event) => {
   event.preventDefault();
   //console.log(event.currentTarget);
-  const cocktailId = event.currentTarget.id;
+  const domCocktailIdValue = event.currentTarget.id;
+  const separatedDomCocktailId = domCocktailIdValue.split('_'); // [cocktail, 123123]
+  const cocktailId = separatedDomCocktailId[1];
 
   if (cocktailIsNotAlreadyFavorite(cocktailId)) {
 
     addCocktailToFavoriteArray(cocktailId);
-    storeFavoriteDrinksArray();
+    storeFavoriteCocktailsArray();
 
     createFavoriteCocktailFromArray(cocktailId);
-    paintCocktail(cocktailId);
+    console.log(domCocktailIdValue);
+    paintCocktailFromDom(`#${domCocktailIdValue}`);
   }
 };
 
-const paintCocktail = (cocktailId) => {
-  const cocktail = document.querySelector(`#${cocktailId}`);
+
+const paintCocktailFromDom = (domCocktailId) => {
+  const cocktail = document.querySelector(domCocktailId);
   cocktail.classList.add('selectedCocktail');
 }
 
-const storeDrinksArray = ()=> {
+const unPaintCocktailFromDom = (cocktailId) => {
+  const cocktailListId = `#cocktail_${cocktailId}`;
+  const cocktail = document.querySelector(cocktailListId);
+  cocktail.classList.remove('selectedCocktail');
+}
+
+
+const storeCocktailsArray = ()=> {
   localStorage.setItem('dataNormal', JSON.stringify(cocktails));
 }
+
 
 const createCocktailsFromArray = () => {
   for (const cocktail of cocktails) {
@@ -60,11 +72,14 @@ const createCocktailsFromArray = () => {
   }
 }
 
+
 const paintCocktailsThatAreFavorites = () => {
   for (const favoriteCocktail of favoriteCocktails) {
-    paintCocktail(favoriteCocktail.id);
+    const cocktailIdDom = `#cocktail_${favoriteCocktail.id}`;
+    paintCocktailFromDom(cocktailIdDom);
   }
 }
+
 
 const loadCocktailsFromStorage = () => {
   const cocktailsFromStorage = JSON.parse(localStorage.getItem("dataNormal"));
@@ -73,13 +88,16 @@ const loadCocktailsFromStorage = () => {
   if (cocktailsFromStorage !== null) {
     cocktails = cocktailsFromStorage;
     createCocktailsFromArray();
-    paintCocktailsThatAreFavorites();;
+    paintCocktailsThatAreFavorites();
   }
 };
+
 
 const doFirstMargaritaSearch = () => {
   renderCocktails('margarita');
 };
+
+
 
 loadCocktailsFromStorage();
 

@@ -9,13 +9,14 @@ const handleClickSearch = (event) => {
   event.preventDefault();
 
   const searchValue = searchInput.value;
-  clearCocktails();
   renderCocktails(searchValue);
 };
 
 btnSearch.addEventListener("click", handleClickSearch);
 
 const renderCocktails = (cocktaillName) => {
+  clearCocktails();
+
   const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${cocktaillName}`;
 
   fetch(url, {
@@ -27,19 +28,19 @@ const renderCocktails = (cocktaillName) => {
       for (const drink of dataResponse.drinks) {
         const imageUrl = drink.strDrinkThumb;
         const drinkName = drink.strDrink;
-        const drinkId = `cocktail_${drink.idDrink}`;
+        const drinkId = drink.idDrink;
 
         // agregar el coktail a un array
-        addDrinkToArray(imageUrl, drinkName, drinkId);
+        addCocktailToArray(imageUrl, drinkName, drinkId);
       }
 
-      storeDrinksArray();
+      storeCocktailsArray();
 
       createCocktailsFromArray();
     });
 };
 
-const addDrinkToArray = (imageUrl, drinkName, drinkId) => {
+const addCocktailToArray = (imageUrl, drinkName, drinkId) => {
   cocktails.push({
     id: drinkId,
     name: drinkName,
