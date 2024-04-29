@@ -1,7 +1,8 @@
 console.log("search");
 const btnSearch = document.querySelector(".js_btnSearch");
 const searchInput = document.querySelector(".js_inputSearch");
-const resetButton = document.querySelector('.js_resetBtn');
+const resetBtn = document.querySelector('.js_resetBtn');
+
 
 const handleClickSearch = (event) => {
   console.log("handleClickSearch");
@@ -46,7 +47,17 @@ const addDrinkToArray = (imageUrl, drinkName, drinkId) => {
 };
 
 const handleClickReset = ()=>{
-  
+  clearCocktails();
+};
+
+const clearCocktails = () => {
+  const ulListCocktail = document.querySelector(".jsCocktailUl");
+  while (ulListCocktail.firstChild) {
+    ulListCocktail.removeChild(ulListCocktail.firstChild);
+  }
+  cocktails = [];
+  localStorage.removeItem('dataNormal');
 }
 
-resetButton.addEventListener('click',handleClickReset);
+
+resetBtn.addEventListener('click',handleClickReset);
