@@ -77,4 +77,10 @@ const loadCocktailsFromStorage = () => {
   }
 };
 
+const doFirstMargaritaSearch = () => {
+  renderCocktails('margarita');
+};
+
 loadCocktailsFromStorage();
+
+doFirstMargaritaSearch();
