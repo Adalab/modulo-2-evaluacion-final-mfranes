@@ -1,22 +1,25 @@
 console.log("search");
 const btnSearch = document.querySelector(".js_btnSearch");
 const searchInput = document.querySelector(".js_inputSearch");
-const resetBtn = document.querySelector('.js_resetBtn');
-
+const resetBtn = document.querySelector(".js_resetBtn");
 
 const handleClickSearch = (event) => {
   console.log("handleClickSearch");
   event.preventDefault();
 
   const searchValue = searchInput.value;
+  clearCocktails();
   renderCocktails(searchValue);
 };
-
 btnSearch.addEventListener("click", handleClickSearch);
 
-const renderCocktails = (cocktaillName) => {
+const handleClickReset = () => {
   clearCocktails();
+};
+resetBtn.addEventListener("click", handleClickReset);
 
+
+const renderCocktails = (cocktaillName) => {
   const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${cocktaillName}`;
 
   fetch(url, {
@@ -37,29 +40,12 @@ const renderCocktails = (cocktaillName) => {
       storeCocktailsArray();
 
       createCocktailsFromArray();
+
+      paintCocktailsThatAreFavorites();
     });
 };
 
-const addCocktailToArray = (imageUrl, drinkName, drinkId) => {
-  cocktails.push({
-    id: drinkId,
-    name: drinkName,
-    imageUrl: imageUrl,
-  });
+
+const doFirstMargaritaSearch = () => {
+  renderCocktails("margarita");
 };
-
-const handleClickReset = ()=>{
-  clearCocktails();
-};
-
-const clearCocktails = () => {
-  const ulListCocktail = document.querySelector(".jsCocktailUl");
-  while (ulListCocktail.firstChild) {
-    ulListCocktail.removeChild(ulListCocktail.firstChild);
-  }
-  cocktails = [];
-  localStorage.removeItem('dataNormal');
-}
-
-
-resetBtn.addEventListener("click", handleClickReset);

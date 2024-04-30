@@ -1,0 +1,5 @@
+loadFavoriteCocktailsFromStorage();
+
+loadCocktailsFromStorage();
+
+doFirstMargaritaSearch();

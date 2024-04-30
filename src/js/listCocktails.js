@@ -34,16 +34,15 @@ const handleClickArticle = (event) => {
   event.preventDefault();
   //console.log(event.currentTarget);
   const domCocktailIdValue = event.currentTarget.id;
-  const separatedDomCocktailId = domCocktailIdValue.split('_'); // [cocktail, 123123]
+  const separatedDomCocktailId = domCocktailIdValue.split("_"); // [cocktail, 123123]
   const cocktailId = separatedDomCocktailId[1];
 
   if (cocktailIsNotAlreadyFavorite(cocktailId)) {
-
     addCocktailToFavoriteArray(cocktailId);
     storeFavoriteCocktailsArray();
 
     createFavoriteCocktailFromArray(cocktailId);
-    console.log(domCocktailIdValue);
+    //console.log(domCocktailIdValue);
     paintCocktailFromDom(`#${domCocktailIdValue}`);
   }
 };
@@ -51,34 +50,43 @@ const handleClickArticle = (event) => {
 
 const paintCocktailFromDom = (domCocktailId) => {
   const cocktail = document.querySelector(domCocktailId);
-  cocktail.classList.add('selectedCocktail');
-}
+  console.log("paintCocktailFromDom - cocktail: " + cocktail);
+  if (cocktail !== null) {
+    cocktail.classList.add("selectedCocktail");
+  }
+};
+
 
 const unPaintCocktailFromDom = (cocktailId) => {
   const cocktailListId = `#cocktail_${cocktailId}`;
   const cocktail = document.querySelector(cocktailListId);
-  cocktail.classList.remove('selectedCocktail');
-}
+  if (cocktail !== null) {
+    cocktail.classList.remove("selectedCocktail");
+  }
+};
 
 
-const storeCocktailsArray = ()=> {
-  localStorage.setItem('dataNormal', JSON.stringify(cocktails));
-}
+const storeCocktailsArray = () => {
+  localStorage.setItem("dataNormal", JSON.stringify(cocktails));
+};
 
 
 const createCocktailsFromArray = () => {
   for (const cocktail of cocktails) {
     createArticle(cocktail.imageUrl, cocktail.name, cocktail.id);
   }
-}
+};
 
 
 const paintCocktailsThatAreFavorites = () => {
   for (const favoriteCocktail of favoriteCocktails) {
     const cocktailIdDom = `#cocktail_${favoriteCocktail.id}`;
+    console.log(
+      "paintCocktailsThatAreFavorites - cocktailIdDom: " + cocktailIdDom
+    );
     paintCocktailFromDom(cocktailIdDom);
   }
-}
+};
 
 
 const loadCocktailsFromStorage = () => {
@@ -93,12 +101,20 @@ const loadCocktailsFromStorage = () => {
 };
 
 
-const doFirstMargaritaSearch = () => {
-  renderCocktails('margarita');
+const addCocktailToArray = (imageUrl, drinkName, drinkId) => {
+  cocktails.push({
+    id: drinkId,
+    name: drinkName,
+    imageUrl: imageUrl,
+  });
 };
 
 
-
-loadCocktailsFromStorage();
-
-doFirstMargaritaSearch();
+const clearCocktails = () => {
+  const ulListCocktail = document.querySelector(".jsCocktailUl");
+  while (ulListCocktail.firstChild) {
+    ulListCocktail.removeChild(ulListCocktail.firstChild);
+  }
+  cocktails = [];
+  localStorage.removeItem("dataNormal");
+};
