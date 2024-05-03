@@ -32,9 +32,10 @@ const renderCocktails = (cocktaillName) => {
         const imageUrl = drink.strDrinkThumb;
         const drinkName = drink.strDrink;
         const drinkId = drink.idDrink;
-
+        const instruction = drink.strInstructions;
+        console.log(drink.strInstructions);
         // agregar el coktail a un array
-        addCocktailToArray(imageUrl, drinkName, drinkId);
+        addCocktailToArray(imageUrl, drinkName, drinkId,instruction);
       }
 
       storeCocktailsArray();

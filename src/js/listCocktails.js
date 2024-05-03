@@ -1,6 +1,6 @@
 console.log("list");
 
-const createArticle = (imageUrl, drinkName, drinkId) => {
+const createArticle = (imageUrl, drinkName, drinkId,instruction) => {
   let imageUrlWithDefault = imageUrl;
   if (imageUrl === null) {
     imageUrlWithDefault =
@@ -27,6 +27,12 @@ const createArticle = (imageUrl, drinkName, drinkId) => {
   cocktailTitle.textContent = drinkName;
   anArticle.appendChild(cocktailTitle);
   listElement.appendChild(anArticle);
+
+  const instructionEs = document.createElement('p');
+  console.log(instruction);
+  instructionEs.textContent= instruction;
+  anArticle.appendChild(instructionEs);
+
 };
 
 
@@ -73,7 +79,7 @@ const storeCocktailsArray = () => {
 
 const createCocktailsFromArray = () => {
   for (const cocktail of cocktails) {
-    createArticle(cocktail.imageUrl, cocktail.name, cocktail.id);
+    createArticle(cocktail.imageUrl, cocktail.name, cocktail.id, cocktail.instruction);
   }
 };
 
@@ -101,11 +107,12 @@ const loadCocktailsFromStorage = () => {
 };
 
 
-const addCocktailToArray = (imageUrl, drinkName, drinkId) => {
+const addCocktailToArray = (imageUrl, drinkName, drinkId,instruction) => {
   cocktails.push({
     id: drinkId,
     name: drinkName,
     imageUrl: imageUrl,
+    instruction: instruction,
   });
 };
 
@@ -118,3 +125,14 @@ const clearCocktails = () => {
   cocktails = [];
   localStorage.removeItem("dataNormal");
 };
+
+const logBtn = document.querySelector('.js_logBtn');
+
+const handleClickLog = ()=> {
+  console.log(cocktails);
+for (const log of cocktails){
+  console.log(log.name);
+}
+ };
+
+logBtn.addEventListener('click',handleClickLog);
